@@ -4,8 +4,8 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'LocalCrypto P2P Buy & Sell',
+  description: 'LocalCrpto is the place to trade your crypto and fiat directly from person to person. LocalCrpto also can be used a wallet platform to store popular cryptocurrencies like Bitcoin, Litecoin, Dogecoin, Ethereum, Tether, Binance Smart Chain, Tron etc.',
 };
 
 export default function RootLayout({ children }: { children: any }) {
