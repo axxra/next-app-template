@@ -1,11 +1,11 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import { Header } from '@/components/Header/Header';
+import { Box } from '@mantine/core';
+import cls from './root.module.css';
 
 export default function HomePage() {
   return (
-    <>
-      <Welcome />
-      <ColorSchemeToggle />
-    </>
+    <Box className={cls.root}>
+      <Header />
+    </Box>
   );
 }
