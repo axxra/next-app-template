@@ -14,19 +14,19 @@ export function Header() {
                     <Button leftSection={<IconBasketUp />} variant="filled">
                         Buy
                     </Button>
-                    <Button color="myRed" leftSection={<IconBasketDown />} variant="light">
+                    <Button color="myRed" leftSection={<IconBasketDown />} variant="subtle">
                         Sell
                     </Button>
-                    <Button leftSection={<IconHistory />} variant="light">
+                    <Button leftSection={<IconHistory />} variant="subtle">
                         History
                     </Button>
-                    <Button leftSection={<IconWallet />} variant="light">
+                    <Button leftSection={<IconWallet />} variant="subtle">
                         Wallet
                     </Button>
                     {/* <Button leftSection={<IconUser />} variant="light">
                         Account
                     </Button> */}
-                    <Button leftSection={<IconUser />} variant="light">
+                    <Button leftSection={<IconUser />} variant="subtle">
                         Sign Up
                     </Button>
                     <ToggleMenu />
