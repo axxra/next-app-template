@@ -1,9 +1,14 @@
+"use client";
+
 import { Box, Button, Container, Group, Image } from "@mantine/core";
 import cls from "./Header.module.css";
 import { IconBasketDown, IconBasketUp, IconHistory, IconLogin, IconMenu, IconMenu2, IconUser, IconWallet } from "@tabler/icons-react";
 import { ToggleMenu } from "../ToggleMenu/ToggleMenu";
+import { useAuthStore, useMenuStore } from "@/store";
 
 export function Header() {
+    const { menu, setMenu } = useMenuStore();
+    const { isAuth } = useAuthStore();
 
     return (
         <Box component="header" className={cls.header}>
@@ -11,23 +16,20 @@ export function Header() {
                 <Image h={32} w="auto" fit="contain" src="/logo.svg" alt="logo" darkHidden />
                 <Image h={32} w="auto" fit="contain" src="/dark.svg" alt="logo" lightHidden />
                 <Group>
-                    <Button leftSection={<IconBasketUp />} variant="filled">
+                    <Button leftSection={<IconBasketUp />} variant={menu === 'buy' ? "filled" : "subtle"} onClick={() => { setMenu('buy') }}>
                         Buy
                     </Button>
-                    <Button color="myRed" leftSection={<IconBasketDown />} variant="subtle">
+                    <Button color="myRed" leftSection={<IconBasketDown />} variant={menu === 'sell' ? "filled" : "subtle"} onClick={() => { setMenu('sell') }}>
                         Sell
                     </Button>
-                    <Button leftSection={<IconHistory />} variant="subtle">
+                    <Button leftSection={<IconHistory />} variant={menu === 'history' ? "filled" : "subtle"} onClick={() => { setMenu('history') }}>
                         History
                     </Button>
-                    <Button leftSection={<IconWallet />} variant="subtle">
+                    <Button leftSection={<IconWallet />} variant={menu === 'wallet' ? "filled" : "subtle"} onClick={() => { setMenu('wallet') }}>
                         Wallet
                     </Button>
-                    {/* <Button leftSection={<IconUser />} variant="light">
-                        Account
-                    </Button> */}
-                    <Button leftSection={<IconUser />} variant="subtle">
-                        Sign Up
+                    <Button w={120} leftSection={<IconUser />} variant={menu === 'account' ? "filled" : "subtle"} onClick={() => { setMenu('account') }}>
+                        {isAuth ? `Account` : `Sign Up`}
                     </Button>
                     <ToggleMenu />
                 </Group>
