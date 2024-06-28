@@ -30,4 +30,30 @@ export const useAuthStore = create<setAuthType & setAuthAction>()((set) => ({
     setIsAuth: (isAuth) => set(() => ({ isAuth })),
 }))
 
+type setCryptoType = {
+    cryptoSelected: string
+}
+
+type setCrptoAction = {
+    setCryptoSelected: (cryptoSelected: setCryptoType['cryptoSelected']) => void
+}
+
+export const useCryptoStore = create<setCryptoType & setCrptoAction>()((set) => ({
+    cryptoSelected: 'USDT',
+    setCryptoSelected: (cryptoSelected) => set(() => ({ cryptoSelected })),
+}))
+
+type setFiatType = {
+    fiatSelected: string
+}
+
+type setFiatAction = {
+    setFiatSelected: (fiatSelected: setFiatType['fiatSelected']) => void
+}
+
+export const useFiatStore = create<setFiatType & setFiatAction>()((set) => ({
+    fiatSelected: 'INR',
+    setFiatSelected: (fiatSelected) => set(() => ({ fiatSelected })),
+}))
+
 

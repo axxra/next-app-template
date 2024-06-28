@@ -16,21 +16,23 @@ export function Header() {
                 <Image h={32} w="auto" fit="contain" src="/logo.svg" alt="logo" darkHidden />
                 <Image h={32} w="auto" fit="contain" src="/dark.svg" alt="logo" lightHidden />
                 <Group>
-                    <Button leftSection={<IconBasketUp />} variant={menu === 'buy' ? "filled" : "subtle"} onClick={() => { setMenu('buy') }}>
-                        Buy
-                    </Button>
-                    <Button color="myRed" leftSection={<IconBasketDown />} variant={menu === 'sell' ? "filled" : "subtle"} onClick={() => { setMenu('sell') }}>
-                        Sell
-                    </Button>
-                    <Button leftSection={<IconHistory />} variant={menu === 'history' ? "filled" : "subtle"} onClick={() => { setMenu('history') }}>
-                        History
-                    </Button>
-                    <Button leftSection={<IconWallet />} variant={menu === 'wallet' ? "filled" : "subtle"} onClick={() => { setMenu('wallet') }}>
-                        Wallet
-                    </Button>
-                    <Button w={120} leftSection={<IconUser />} variant={menu === 'account' ? "filled" : "subtle"} onClick={() => { setMenu('account') }}>
-                        {isAuth ? `Account` : `Sign Up`}
-                    </Button>
+                    <Group visibleFrom="lg">
+                        <Button leftSection={<IconBasketUp />} variant={menu === 'buy' ? "filled" : "subtle"} onClick={() => { setMenu('buy') }}>
+                            Buy
+                        </Button>
+                        <Button color="myRed" leftSection={<IconBasketDown />} variant={menu === 'sell' ? "filled" : "subtle"} onClick={() => { setMenu('sell') }}>
+                            Sell
+                        </Button>
+                        <Button leftSection={<IconHistory />} variant={menu === 'history' ? "filled" : "subtle"} onClick={() => { setMenu('history') }}>
+                            History
+                        </Button>
+                        <Button leftSection={<IconWallet />} variant={menu === 'wallet' ? "filled" : "subtle"} onClick={() => { setMenu('wallet') }}>
+                            Wallet
+                        </Button>
+                        <Button w={120} leftSection={<IconUser />} variant={menu === 'account' ? "filled" : "subtle"} onClick={() => { setMenu('account') }}>
+                            {isAuth ? `Account` : `Sign Up`}
+                        </Button>
+                    </Group>
                     <ToggleMenu />
                 </Group>
             </Container>

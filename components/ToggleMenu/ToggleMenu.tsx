@@ -13,20 +13,20 @@ export function ToggleMenu() {
         <ActionIcon.Group>
             <ActionIcon variant="default" size="lg" aria-label="Menu" onClick={() => { setMenuOpen(!menuOpen) }}>
                 {menuOpen ?
-                    <IconX style={{ width: '70%', height: '70%' }} stroke={1.5} /> :
-                    <IconMenu2 style={{ width: '70%', height: '70%' }} stroke={1.5} />
+                    <IconX /> :
+                    <IconMenu2 />
                 }
             </ActionIcon>
             <ActionIcon variant="default" size="lg" aria-label="DarkTheme" onClick={() => setColorScheme('dark')} darkHidden>
-                <IconMoon style={{ width: '70%', height: '70%' }} stroke={1.5} />
+                <IconMoon />
             </ActionIcon>
             <ActionIcon variant="default" size="lg" aria-label="LightTheme" onClick={() => setColorScheme('light')} lightHidden>
-                <IconSun style={{ width: '70%', height: '70%' }} stroke={1.5} />
+                <IconSun />
             </ActionIcon>
             <ActionIcon variant="default" size="lg" aria-label="Menu" onClick={() => { setIsAuth(!isAuth) }}>
                 {isAuth ?
-                    <IconLogout style={{ width: '70%', height: '70%' }} stroke={1.5} /> :
-                    <IconLogin style={{ width: '70%', height: '70%' }} stroke={1.5} />
+                    <IconLogout /> :
+                    <IconLogin />
                 }
             </ActionIcon>
         </ActionIcon.Group>

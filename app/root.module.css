@@ -1,3 +1,11 @@
 .root {
     height: 100vh;
 }
+
+.mt16 {
+    margin-top: rem(16);
+}
+
+.wfull {
+    width: 100%;
+}
