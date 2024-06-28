@@ -16,7 +16,7 @@ export function Header() {
                 <Image h={32} w="auto" fit="contain" src="/logo.svg" alt="logo" darkHidden />
                 <Image h={32} w="auto" fit="contain" src="/dark.svg" alt="logo" lightHidden />
                 <Group>
-                    <Group visibleFrom="lg">
+                    <Group /* visibleFrom="lg" */>
                         <Button leftSection={<IconBasketUp />} variant={menu === 'buy' ? "filled" : "subtle"} onClick={() => { setMenu('buy') }}>
                             Buy
                         </Button>

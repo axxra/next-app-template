@@ -52,7 +52,7 @@ type setFiatAction = {
 }
 
 export const useFiatStore = create<setFiatType & setFiatAction>()((set) => ({
-    fiatSelected: 'INR',
+    fiatSelected: 'ALL',
     setFiatSelected: (fiatSelected) => set(() => ({ fiatSelected })),
 }))
 

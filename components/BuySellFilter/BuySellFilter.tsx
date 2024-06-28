@@ -9,8 +9,8 @@ import { useState } from "react";
 export function BuySellFilter() {
     const { cryptoSelected, setCryptoSelected } = useCryptoStore();
     const { fiatSelected, setFiatSelected } = useFiatStore();
-    const [amtCurrency, setAmtCurrency] = useState<string>('base');
-    const [paymentMethod, setPaymentMethod] = useState<string>('');
+    const [amtCurrency, setAmtCurrency] = useState<string>('fiat');
+    const [paymentMethod, setPaymentMethod] = useState<string>('ALL');
     const [isUpdate, setIsUpdate] = useState<boolean>(true);
 
     const cryptos = [
@@ -41,22 +41,28 @@ export function BuySellFilter() {
     };
 
     const fiatList: fiatType = {
+        'ALL': {
+            label: "All-Fiats", key: 'ALL', value: 'ALL', list: {
+                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
+            }
+        },
         'INR': {
-            label: "Indian Rupee", key: 'INR', value: 'INR', list: {
-                'UPI': { label: "Unified Payments Interface", key: 'UPI', value: 'UPI' },
-                'IMPS': { label: "Immediate Payment Service", key: 'IMPS', value: 'IMPS' },
-                'NEFT': { label: "National Electronic Funds Transfer", key: 'NEFT', value: 'NEFT' },
-                'RTGS': { label: "Real-time gross settlement", key: 'RTGS', value: 'RTGS' },
+            label: "INR-Indian Rupee", key: 'INR', value: 'INR', list: {
+                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
+                'UPI': { label: "UPI-Unified Payments Interface", key: 'UPI', value: 'UPI' },
+                'IMPS': { label: "IMPS-Immediate Payment Service", key: 'IMPS', value: 'IMPS' },
+                'NEFT': { label: "NEFT-National Electronic Funds Transfer", key: 'NEFT', value: 'NEFT' },
+                'RTGS': { label: "RTGS-Real-time gross settlement", key: 'RTGS', value: 'RTGS' },
             }
         },
         'USD': {
-            label: "US Dollar", key: 'USD', value: 'USD', list: {
-                'NA': { label: "Not Available", key: 'NA', value: 'NA' },
+            label: "USD-US Dollar", key: 'USD', value: 'USD', list: {
+                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
             }
         },
         'RUB': {
-            label: "Russian Rubble", key: 'RUB', value: 'RUB', list: {
-                'NA': { label: "Not Available", key: 'NA', value: 'NA' },
+            label: "RUB-Russian Rubble", key: 'RUB', value: 'RUB', list: {
+                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
             }
         },
     }
@@ -81,7 +87,7 @@ export function BuySellFilter() {
                     rightSectionWidth={36}
                     leftSectionWidth={64}
                     leftSectionPointerEvents="none"
-                    leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="AmountCurrencySymbol"><Text size="sm">{amtCurrency === 'base' ? cryptoSelected : fiatSelected}</Text></ActionIcon>} />
+                    leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="AmountCurrencySymbol"><Text size="sm">{amtCurrency === 'base' ? cryptoSelected : fiatSelected === 'ALL' ? 'USD' : fiatSelected}</Text></ActionIcon>} />
 
                 <Select
                     data={Object.values(fiatList)}
