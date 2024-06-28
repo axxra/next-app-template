@@ -88,7 +88,12 @@ export function BuySellFilter() {
                     placeholder="Select Fiat Currency"
                     value={fiatSelected ? fiatList[fiatSelected].value : ''}
                     searchable
-                    onChange={(v) => { const value = v ? v : 'INR'; setFiatSelected(value); setPaymentMethod(Object.values(fiatList[value].list)[0] ? Object.values(fiatList[value].list)[0].value : '') }}
+                    allowDeselect={false}
+                    onChange={(v) => {
+                        const value = v ? v : 'INR';
+                        setFiatSelected(value);
+                        if (value != fiatSelected) setPaymentMethod(Object.values(fiatList[value].list)[0] ? Object.values(fiatList[value].list)[0].value : '')
+                    }}
                     leftSectionWidth={64}
                     leftSectionPointerEvents="none"
                     leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectFiatCurrency" ><Text size="sm">{fiatSelected ? fiatSelected : "NA"}</Text></ActionIcon>}
@@ -99,6 +104,7 @@ export function BuySellFilter() {
                     placeholder="Select Payment Method"
                     value={Object.values(fiatList[fiatSelected].list)[0] ? fiatList[fiatSelected].list[paymentMethod] ? fiatList[fiatSelected].list[paymentMethod].value : '' : ''}
                     searchable
+                    allowDeselect={false}
                     onChange={(value) => { setPaymentMethod(value ? value : '') }}
                     leftSectionWidth={64}
                     leftSectionPointerEvents="none"
