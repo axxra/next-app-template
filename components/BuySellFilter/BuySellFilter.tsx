@@ -18,11 +18,11 @@ export function BuySellFilter() {
         'BTC',
         'ETH',
         'BSC',
+        'SOL',
+        'AVAX',
+        'TRX',
         'MATIC',
-        /* 'LTC',
-        'DOGE', */
-        'XRP',
-        'TRX'
+        'DOGE'
     ]
 
     type fiatType = {
