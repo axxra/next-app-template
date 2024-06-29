@@ -1,17 +1,16 @@
 "use client";
 
 import { useCryptoStore, useFiatStore } from "@/store";
-import { ActionIcon, Box, Button, Container, Flex, Group, Input, NumberInput, Select, Text } from "@mantine/core";
-import cls from '../../app/root.module.css';
-import { IconArrowsExchange, IconPlayerPause, IconPlayerPlay } from "@tabler/icons-react";
+import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, Text } from "@mantine/core";
+import { IconArrowsExchange } from "@tabler/icons-react";
 import { useState } from "react";
+import { UpdateData } from "../UpdateData/UpdateData";
 
 export function BuySellFilter() {
     const { cryptoSelected, setCryptoSelected } = useCryptoStore();
     const { fiatSelected, setFiatSelected } = useFiatStore();
     const [amtCurrency, setAmtCurrency] = useState<string>('fiat');
     const [paymentMethod, setPaymentMethod] = useState<string>('ALL');
-    const [isUpdate, setIsUpdate] = useState<boolean>(true);
 
     const cryptos = [
         'USDT',
@@ -121,12 +120,7 @@ export function BuySellFilter() {
                     align="center"
                     direction="row"
                     wrap="nowrap">
-                    <Text>{isUpdate ? `Refresh in 10s` : `Update Paused`}</Text>
-                    {
-                        isUpdate ?
-                            <ActionIcon variant="filled" size="lg" aria-label="PauseRefresh" onClick={() => { setIsUpdate(false) }}><IconPlayerPause /></ActionIcon> :
-                            <ActionIcon variant="filled" size="lg" aria-label="PauseRefresh" onClick={() => { setIsUpdate(true) }}><IconPlayerPlay /></ActionIcon>
-                    }
+                    <UpdateData />
                 </Flex>
             </Group>
         </Container>

@@ -57,3 +57,18 @@ export const useFiatStore = create<setFiatType & setFiatAction>()((set) => ({
 }))
 
 
+type timerType = {
+    timer: number
+}
+
+type timerAction = {
+    incTimer: () => void
+    resTimer: () => void
+}
+
+export const useTimerStore = create<timerType & timerAction>()((set) => ({
+    timer: 0,
+    incTimer: () => set((state) => ({ timer: state.timer + 1 })),
+    resTimer: () => set({ timer: 0 }),
+}))
+

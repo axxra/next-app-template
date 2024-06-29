@@ -1,6 +1,7 @@
 .root {
     height: 100vh;
-    min-width: 1232;
+    min-width: rem(1200);
+
 }
 
 .mt16 {
