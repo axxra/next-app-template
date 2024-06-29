@@ -22,23 +22,23 @@ export function UpdateData() {
     }, [timer]);
 
     return (
-        <RingProgress
-            size={36}
-            thickness={2}
-            roundCaps
-            sections={[{ value: timer * 10, color: interval.active ? "#64a46c" : "#e22762" }]}
-            label={
-                <Center>
-                    <ActionIcon variant="filled" radius="xl" size="sm" onClick={() => {
-                        interval.toggle()
-                    }}>
+        <ActionIcon variant="default" radius="xl" size="lg" onClick={() => {
+            interval.toggle()
+        }}>
+            <RingProgress
+                size={32}
+                thickness={2}
+                roundCaps
+                sections={[{ value: timer * 10, color: interval.active ? '#64a46c' : 'red' }]}
+                label={
+                    <Center>
                         {interval.active ?
                             <Text size="sm" >{timer}</Text> :
                             <IconPlayerPlay style={{ width: rem(16), height: rem(16) }} />
                         }
-                    </ActionIcon>
-                </Center>
-            }
-        />
+                    </Center>
+                }
+            />
+        </ActionIcon>
     );
 }
