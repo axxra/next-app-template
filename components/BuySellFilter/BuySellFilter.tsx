@@ -12,17 +12,25 @@ export function BuySellFilter() {
     const [amtCurrency, setAmtCurrency] = useState<string>('fiat');
     const [paymentMethod, setPaymentMethod] = useState<string>('ALL');
 
-    const cryptos = [
-        'USDT',
-        'BTC',
-        'ETH',
-        'BSC',
-        'SOL',
-        'AVAX',
-        'TRX',
-        'MATIC',
-        'DOGE'
-    ]
+    type cryptoType = {
+        [key: string]: {
+            label: string
+            key: string
+            value: string
+        };
+    };
+
+    const cryptoList: cryptoType = {
+        'USDT': { key: 'USDT', value: 'USDT', label: 'USDT-Tether' },
+        'BTC': { key: 'BTC', value: 'BTC', label: 'BTC-Bitcoin' },
+        'ETH': { key: 'ETH', value: 'ETH', label: 'ETH-Ethereum' },
+        'BSC': { key: 'BSC', value: 'BSC', label: 'BSC-Binance' },
+        'SOL': { key: 'SOL', value: 'SOL', label: 'SOL-Solana' },
+        'AVAX': { key: 'AVAX', value: 'AVAX', label: 'AVAX-Avalanche' },
+        'TRX': { key: 'TRX', value: 'TRX', label: 'TRX-Tron' },
+        'MATIC': { key: 'MATIC', value: 'MATIC', label: 'MATIC-Polygon' },
+        'DOGE': { key: 'DOGE', value: 'DOGE', label: 'DOGE-Dogecoin' }
+    }
 
     type fiatType = {
         [key: string]: {
@@ -66,8 +74,8 @@ export function BuySellFilter() {
         },
     }
 
-    const items = cryptos.map((c, i) => (
-        <Button key={i} variant={cryptoSelected === c ? 'filled' : 'light'} onClick={() => { setCryptoSelected(c) }}>{c}</Button>
+    const items = Object.values(cryptoList).map((c, i) => (
+        <Button key={i} variant={cryptoSelected === c.value ? 'filled' : 'light'} onClick={() => { setCryptoSelected(c.value) }}>{c.value}</Button>
     ))
 
     return (
@@ -76,11 +84,11 @@ export function BuySellFilter() {
                 justify="flex-start"
                 align="center" direction="column">
                 <Title>
-                    Buy {cryptoSelected} using {fiatSelected === 'ALL' ? `any FIATS` : `${fiatList[fiatSelected].label}`}
+                    {`Buy ${cryptoList[cryptoSelected].label} using ${fiatSelected === 'ALL' ? `any FIAT currency` : `${fiatList[fiatSelected].label}`}`}
                 </Title>
                 <Container size={1000}>
                     <Text c="dimmed" mb="md">
-                        LocalCrypto is the best place to trade your crypto to {fiatSelected === 'ALL' ? `any FIATS` : fiatList[fiatSelected].label} directly from person to person. It is the first platform to support the Self-KYC verification model where users verify the traders themselves.
+                        LocalCrypto is the best platform for directly buying {cryptoList[cryptoSelected].label} using {fiatSelected === 'ALL' ? `any FIAT currency` : fiatList[fiatSelected].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
                     </Text>
                 </Container>
             </Flex>
