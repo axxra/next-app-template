@@ -80,7 +80,7 @@ export function BuySellFilter() {
                 </Title>
                 <Container size={1000}>
                     <Text c="dimmed" mb="md">
-                        LocalCrpto is the best place to trade your crypto to {fiatSelected === 'ALL' ? `any FIATS` : fiatList[fiatSelected].label} directly from person to person. It is the first platform to support self user KYC model where users verify the traders themselves.
+                        LocalCrypto is the best place to trade your crypto to {fiatSelected === 'ALL' ? `any FIATS` : fiatList[fiatSelected].label} directly from person to person. It is the first platform to support the Self-KYC verification model where users verify the traders themselves.
                     </Text>
                 </Container>
             </Flex>
