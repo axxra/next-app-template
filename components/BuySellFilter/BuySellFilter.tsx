@@ -1,7 +1,7 @@
 "use client";
 
 import { useCryptoStore, useFiatStore } from "@/store";
-import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, Text } from "@mantine/core";
+import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, Text, Title } from "@mantine/core";
 import { IconArrowsExchange } from "@tabler/icons-react";
 import { useState } from "react";
 import { UpdateData } from "../UpdateData/UpdateData";
@@ -72,6 +72,18 @@ export function BuySellFilter() {
 
     return (
         <Container size="lg" >
+            <Flex m="lg" gap='sm'
+                justify="flex-start"
+                align="center" direction="column">
+                <Title>
+                    Buy {cryptoSelected} using {fiatSelected === 'ALL' ? `any FIATS` : `${fiatList[fiatSelected].label}`}
+                </Title>
+                <Container size={1000}>
+                    <Text c="dimmed" mb="md">
+                        LocalCrpto is the best place to trade your crypto to {fiatSelected === 'ALL' ? `any FIATS` : fiatList[fiatSelected].label} directly from person to person. It is the first platform to support self user KYC model where users verify the traders themselves.
+                    </Text>
+                </Container>
+            </Flex>
             <Group>
                 <Button.Group>
                     {items}

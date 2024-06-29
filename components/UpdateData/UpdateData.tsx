@@ -9,10 +9,12 @@ import { useEffect } from "react";
 export function UpdateData() {
     const { timer, incTimer, resTimer } = useTimerStore();
     const interval = useInterval(() => {
-        if (timer < 10) {
-            incTimer()
-        } else {
-            resTimer();
+        if (document.hasFocus()) {
+            if (timer < 10) {
+                incTimer()
+            } else {
+                resTimer();
+            }
         }
     }, 1000);
 
