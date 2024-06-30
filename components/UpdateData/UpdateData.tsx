@@ -1,20 +1,20 @@
 "use client";
 
-import { useTimerStore } from "@/store";
 import { ActionIcon, Center, RingProgress, Text, rem, useMantineColorScheme } from "@mantine/core";
 import { useInterval } from "@mantine/hooks";
 import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function UpdateData() {
     const { colorScheme } = useMantineColorScheme();
-    const { timer, incTimer, resTimer } = useTimerStore();
+    const [timer, setTimer] = useState<number>(10);
     const interval = useInterval(() => {
         if (document.hasFocus()) {
             if (timer < 10) {
-                incTimer()
+                setTimer((s) => s + 1);
             } else {
-                resTimer();
+                //update new data
+                setTimer(0);
             }
         }
     }, 1000);
@@ -26,7 +26,9 @@ export function UpdateData() {
 
     return (
         <ActionIcon.Group>
-            <ActionIcon variant="default" radius="xl" size="lg" onClick={() => { }}>
+            <ActionIcon variant="default" radius="xl" size="lg" onClick={() => {
+                interval.toggle()
+            }}>
                 <RingProgress
                     size={32}
                     thickness={2}
@@ -34,10 +36,6 @@ export function UpdateData() {
                     sections={[{ value: timer * 10, color: interval.active ? colorScheme === 'dark' ? 'myDark' : 'myLight' : 'myRed' }]}
                     label={
                         <Center>
-                            {/* {interval.active ?
-                            <Text size="sm" >{timer}</Text> :
-                            <IconPlayerPlay style={{ width: rem(16), height: rem(16) }} />
-                        } */}
                             <Text size="sm" >{timer}</Text>
                         </Center>
                     }

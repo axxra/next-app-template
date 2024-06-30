@@ -34,7 +34,7 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
             href={"/p2p/" + menu + "/" + c.value + "_" + fiatSelected}
             onClick={(event) => {
                 event.preventDefault();
-                router.push(`/p2p/${menu}/${c.value}_${fiatSelected}`)
+                router.push(`/p2p/${menu}/${c.value}_${fiatSelected}`, { scroll: false })
                 //setCryptoSelected(c.value)
             }}>{c.value}</Button>
     ))
@@ -97,7 +97,7 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
                     allowDeselect={false}
                     onChange={(v) => {
                         if (v) {
-                            router.push(`/p2p/${menu}/${cryptoSelected}_${v ? v : 'ALL'}`);
+                            router.push(`/p2p/${menu}/${cryptoSelected}_${v ? v : 'ALL'}`, { scroll: false });
                         }
                     }}
                     /* leftSectionWidth={64}
