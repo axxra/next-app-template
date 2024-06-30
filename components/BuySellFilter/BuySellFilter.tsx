@@ -32,24 +32,31 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
         <Button key={i} variant={cryptoSelected === c.value ? 'filled' : 'light'}
             component="a"
             href={"/p2p/" + menu + "/" + c.value + "_" + fiatSelected}
-            onClick={(event) => { event.preventDefault(); router.push(`/p2p/${menu}/${c.value}_${fiatSelected}`) /* setCryptoSelected(c.value) */ }}>{c.value}</Button>
+            onClick={(event) => {
+                event.preventDefault();
+                router.push(`/p2p/${menu}/${c.value}_${fiatSelected}`)
+                //setCryptoSelected(c.value)
+            }}>{c.value}</Button>
     ))
 
     const renderFiatOption: SelectProps['renderOption'] = ({ option, checked }) => (
-        <Text size="sm" component='a' href={"/p2p/" + menu + "/" + cryptoSelected + "_" + option.value} style={{ width: rem("100%") }}>
+        <Text size="sm" component='a' href={"/p2p/" + menu + "/" + cryptoSelected + "_" + option.value} style={{ width: rem("100%") }} onClick={(e) => { e.preventDefault() }}>
             <Group flex="1" gap="xs">
                 {checked && <IconCheck size={18} opacity={0.6} stroke={1.5} />}
-                {option.value + "-" + option.label}
+                {/* {option.value + "-" + option.label} */}
+                {option.label}
             </Group>
         </Text>
     );
 
-    const renderPaymentOption: SelectProps['renderOption'] = ({ option, checked }) => (
-        <Group flex="1" gap="xs">
-            {checked && <IconCheck size={18} />}
-            {option.value + "-" + option.label}
-        </Group>
-    );
+    /*     const renderPaymentOption: SelectProps['renderOption'] = ({ option, checked }) => (
+            <Text size="sm" >
+                <Group flex="1" gap="xs" >
+                    {checked && <IconCheck size={18} />}
+                    {option.value + "-" + option.label}
+                </Group>
+            </Text>
+        ); */
 
     return (
         <Container size="lg" mt={rem(16)}>
@@ -82,31 +89,37 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
                     leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="AmountCurrencySymbol"><Text size="sm">{amtCurrency === 'base' ? cryptoSelected : fiatSelected === 'ALL' ? 'USD' : fiatSelected}</Text></ActionIcon>} />
 
                 <Select
-                    data={Object.values(fiatList)}
+                    data={Object.values(fiatList).map((f) => { return { value: f.value, label: f.value + "-" + f.label } })}
                     placeholder="Select Fiat Currency"
                     value={fiatSelected ? fiatList[fiatSelected].value : ''}
                     searchable
+                    clearable
                     allowDeselect={false}
                     onChange={(v) => {
-                        router.push(`/p2p/${menu}/${cryptoSelected}_${v ? v : 'ALL'}`);
+                        if (v) {
+                            router.push(`/p2p/${menu}/${cryptoSelected}_${v ? v : 'ALL'}`);
+                        }
                     }}
-                    leftSectionWidth={64}
+                    /* leftSectionWidth={64}
                     leftSectionPointerEvents="none"
-                    leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectFiatCurrency" ><Text size="sm">{fiatSelected ? fiatSelected : "NA"}</Text></ActionIcon>}
+                    leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectFiatCurrency" ><Text size="sm">{fiatSelected ? fiatSelected : "NA"}</Text></ActionIcon>} */
                     renderOption={renderFiatOption}
                 />
 
                 <Select
-                    data={Object.values(fiatList[fiatSelected].list)}
+                    data={Object.values(fiatList[fiatSelected].list).map((f) => { return { value: f.value, label: f.value + "-" + f.label } })}
                     placeholder="Select Payment Method"
                     value={Object.values(fiatList[fiatSelected].list)[0] ? fiatList[fiatSelected].list[paymentMethod] ? fiatList[fiatSelected].list[paymentMethod].value : '' : ''}
                     searchable
+                    clearable
                     allowDeselect={false}
-                    onChange={(value) => { setPaymentMethod(value ? value : '') }}
-                    leftSectionWidth={64}
-                    leftSectionPointerEvents="none"
-                    leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectPaymentMethod" ><Text size="sm">{paymentMethod ? paymentMethod : 'NA'}</Text></ActionIcon>}
-                    renderOption={renderPaymentOption}
+                    onChange={(v) => {
+                        v && setPaymentMethod(v)
+                    }}
+                /* leftSectionWidth={64}
+                leftSectionPointerEvents="none"
+                leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectPaymentMethod" ><Text size="sm">{paymentMethod ? paymentMethod : 'NA'}</Text></ActionIcon>} */
+                //renderOption={renderPaymentOption}
                 />
                 <Flex gap="md"
                     justify="flex-end"
