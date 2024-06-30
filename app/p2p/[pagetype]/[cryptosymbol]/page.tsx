@@ -22,18 +22,23 @@ export async function generateMetadata(
     }
 }
 
+type paramType = {
+    pagetype: string
+    cryptosymbol: string
+}
+
 export async function generateStaticParams() {
-    const paramList = ["buy", "sell"].map((t) => {
+    const paramList: Array<paramType> = [];
+    ["buy", "sell"].map((t) => {
         Object.values(cryptoList).map((c) => {
             Object.values(fiatList).map((f) => {
-                return {
+                paramList.push({
                     pagetype: t,
                     cryptosymbol: `${c.value}_${f.value}`
-                }
+                })
             })
         })
     })
-
     return paramList
 }
 

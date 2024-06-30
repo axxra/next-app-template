@@ -14,7 +14,6 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
     const splitparam = cryptosymbol.split('_');
     const cryptoparam = splitparam[0] && cryptoList[splitparam[0]] ? splitparam[0] : 'USDT';
     const fiatparam = splitparam[1] && fiatList[splitparam[1]] ? splitparam[1] : 'ALL';
-    console.log(cryptoparam, fiatparam, pagetype);
 
     const { cryptoSelected, setCryptoSelected } = useCryptoStore();
     const { fiatSelected, setFiatSelected } = useFiatStore();
