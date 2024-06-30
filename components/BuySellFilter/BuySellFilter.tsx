@@ -58,11 +58,11 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
                 justify="flex-start"
                 align="center" direction="column">
                 <Title>
-                    {`Buy ${cryptoList[cryptoparam].label} using ${fiatparam === 'ALL' ? `any FIAT currency` : `${fiatList[fiatparam].label}`}`}
+                    {`${pagetype === 'buy' ? 'Buy' : 'Sell'} ${cryptoList[cryptoparam].label} ${pagetype === 'buy' ? 'using' : 'for'} ${fiatparam === 'ALL' ? `any FIAT currency` : `${fiatList[fiatparam].label}`}`}
                 </Title>
                 <Container size={1000}>
                     <Text c="dimmed" mb="md">
-                        LocalCrypto is the best platform for directly buying {cryptoList[cryptoparam].value}-{cryptoList[cryptoparam].label} using {fiatparam === "ALL" ? '' : fiatList[fiatparam].value + "-"}{fiatparam === 'ALL' ? `any FIAT currency` : fiatList[fiatparam].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
+                        LocalCrypto is the best platform for directly {pagetype === 'buy' ? "buying" : "selling"} {cryptoList[cryptoparam].value}-{cryptoList[cryptoparam].label} {pagetype === 'buy' ? "using" : "for"} {fiatparam === "ALL" ? '' : fiatList[fiatparam].value + "-"}{fiatparam === 'ALL' ? `any FIAT currency` : fiatList[fiatparam].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
                     </Text>
                 </Container>
             </Flex>
