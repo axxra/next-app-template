@@ -1,94 +1,68 @@
 "use client";
 
-import { useCryptoStore, useFiatStore } from "@/store";
-import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, Text, Title } from "@mantine/core";
-import { IconArrowsExchange } from "@tabler/icons-react";
-import { useState } from "react";
+import { cryptoList, fiatList, useCryptoStore, useFiatStore, useMenuStore } from "@/store";
+import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, SelectProps, Text, Title, rem } from "@mantine/core";
+import { IconArrowsExchange, IconCheck } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
 import { UpdateData } from "../UpdateData/UpdateData";
+import { useRouter } from "next/navigation";
 
-export function BuySellFilter() {
+export function BuySellFilter({ params }: { params: { pagetype: string, cryptosymbol: string } }) {
+    const router = useRouter();
+    const pagetype = params.pagetype ? params.pagetype.toLowerCase() === 'buy' ? params.pagetype.toLowerCase() : "sell" : "buy";
+    const cryptosymbol = params.cryptosymbol ? params.cryptosymbol.toUpperCase() : 'USDT_ALL';
+    const splitparam = cryptosymbol.split('_');
+    const cryptoparam = splitparam[0] && cryptoList[splitparam[0]] ? splitparam[0] : 'USDT';
+    const fiatparam = splitparam[1] && fiatList[splitparam[1]] ? splitparam[1] : 'ALL';
+    console.log(cryptoparam, fiatparam, pagetype);
+
     const { cryptoSelected, setCryptoSelected } = useCryptoStore();
     const { fiatSelected, setFiatSelected } = useFiatStore();
+    const { menu, setMenu } = useMenuStore();
     const [amtCurrency, setAmtCurrency] = useState<string>('fiat');
     const [paymentMethod, setPaymentMethod] = useState<string>('ALL');
 
-    type cryptoType = {
-        [key: string]: {
-            label: string
-            key: string
-            value: string
-        };
-    };
+    useEffect(() => {
+        setCryptoSelected(cryptoparam);
+        setFiatSelected(fiatparam);
+        setMenu(pagetype);
 
-    const cryptoList: cryptoType = {
-        'USDT': { key: 'USDT', value: 'USDT', label: 'USDT-Tether' },
-        'BTC': { key: 'BTC', value: 'BTC', label: 'BTC-Bitcoin' },
-        'ETH': { key: 'ETH', value: 'ETH', label: 'ETH-Ethereum' },
-        'BSC': { key: 'BSC', value: 'BSC', label: 'BSC-Binance' },
-        'SOL': { key: 'SOL', value: 'SOL', label: 'SOL-Solana' },
-        'AVAX': { key: 'AVAX', value: 'AVAX', label: 'AVAX-Avalanche' },
-        'TRX': { key: 'TRX', value: 'TRX', label: 'TRX-Tron' },
-        'MATIC': { key: 'MATIC', value: 'MATIC', label: 'MATIC-Polygon' },
-        'DOGE': { key: 'DOGE', value: 'DOGE', label: 'DOGE-Dogecoin' }
-    }
-
-    type fiatType = {
-        [key: string]: {
-            label: string
-            key: string
-            value: string
-            list: {
-                [key: string]: {
-                    label: string
-                    key: string
-                    value: string
-                };
-            }
-        };
-    };
-
-    const fiatList: fiatType = {
-        'ALL': {
-            label: "All-Fiats", key: 'ALL', value: 'ALL', list: {
-                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
-            }
-        },
-        'INR': {
-            label: "INR-Indian Rupee", key: 'INR', value: 'INR', list: {
-                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
-                'UPI': { label: "UPI-Unified Payments Interface", key: 'UPI', value: 'UPI' },
-                'IMPS': { label: "IMPS-Immediate Payment Service", key: 'IMPS', value: 'IMPS' },
-                'NEFT': { label: "NEFT-National Electronic Funds Transfer", key: 'NEFT', value: 'NEFT' },
-                'RTGS': { label: "RTGS-Real-time gross settlement", key: 'RTGS', value: 'RTGS' },
-            }
-        },
-        'USD': {
-            label: "USD-US Dollar", key: 'USD', value: 'USD', list: {
-                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
-            }
-        },
-        'RUB': {
-            label: "RUB-Russian Rubble", key: 'RUB', value: 'RUB', list: {
-                'ALL': { label: "ALL-Payment Method", key: 'ALL', value: 'ALL' },
-            }
-        },
-    }
+    }, [])
 
     const items = Object.values(cryptoList).map((c, i) => (
-        <Button key={i} variant={cryptoSelected === c.value ? 'filled' : 'light'} onClick={() => { setCryptoSelected(c.value) }}>{c.value}</Button>
+        <Button key={i} variant={cryptoSelected === c.value ? 'filled' : 'light'}
+            component="a"
+            href={"/p2p/" + menu + "/" + c.value + "_" + fiatSelected}
+            onClick={(event) => { event.preventDefault(); router.push(`/p2p/${menu}/${c.value}_${fiatSelected}`) /* setCryptoSelected(c.value) */ }}>{c.value}</Button>
     ))
 
+    const renderFiatOption: SelectProps['renderOption'] = ({ option, checked }) => (
+        <Text size="sm" component='a' href={"/p2p/" + menu + "/" + cryptoSelected + "_" + option.value} style={{ width: rem("100%") }}>
+            <Group flex="1" gap="xs">
+                {checked && <IconCheck size={18} opacity={0.6} stroke={1.5} />}
+                {option.value + "-" + option.label}
+            </Group>
+        </Text>
+    );
+
+    const renderPaymentOption: SelectProps['renderOption'] = ({ option, checked }) => (
+        <Group flex="1" gap="xs">
+            {checked && <IconCheck size={18} />}
+            {option.value + "-" + option.label}
+        </Group>
+    );
+
     return (
-        <Container size="lg" >
+        <Container size="lg" mt={rem(16)}>
             <Flex m="lg" gap='sm'
                 justify="flex-start"
                 align="center" direction="column">
                 <Title>
-                    {`Buy ${cryptoList[cryptoSelected].label} using ${fiatSelected === 'ALL' ? `any FIAT currency` : `${fiatList[fiatSelected].label}`}`}
+                    {`Buy ${cryptoList[cryptoparam].label} using ${fiatparam === 'ALL' ? `any FIAT currency` : `${fiatList[fiatparam].label}`}`}
                 </Title>
                 <Container size={1000}>
                     <Text c="dimmed" mb="md">
-                        LocalCrypto is the best platform for directly buying {cryptoList[cryptoSelected].label} using {fiatSelected === 'ALL' ? `any FIAT currency` : fiatList[fiatSelected].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
+                        LocalCrypto is the best platform for directly buying {cryptoList[cryptoparam].value}-{cryptoList[cryptoparam].label} using {fiatparam === "ALL" ? '' : fiatList[fiatparam].value + "-"}{fiatparam === 'ALL' ? `any FIAT currency` : fiatList[fiatparam].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
                     </Text>
                 </Container>
             </Flex>
@@ -115,13 +89,12 @@ export function BuySellFilter() {
                     searchable
                     allowDeselect={false}
                     onChange={(v) => {
-                        const value = v ? v : 'INR';
-                        setFiatSelected(value);
-                        if (value != fiatSelected) setPaymentMethod(Object.values(fiatList[value].list)[0] ? Object.values(fiatList[value].list)[0].value : '')
+                        router.push(`/p2p/${menu}/${cryptoSelected}_${v ? v : 'ALL'}`);
                     }}
                     leftSectionWidth={64}
                     leftSectionPointerEvents="none"
                     leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectFiatCurrency" ><Text size="sm">{fiatSelected ? fiatSelected : "NA"}</Text></ActionIcon>}
+                    renderOption={renderFiatOption}
                 />
 
                 <Select
@@ -134,6 +107,7 @@ export function BuySellFilter() {
                     leftSectionWidth={64}
                     leftSectionPointerEvents="none"
                     leftSection={<ActionIcon w={56} variant="default" size="md" aria-label="SelectPaymentMethod" ><Text size="sm">{paymentMethod ? paymentMethod : 'NA'}</Text></ActionIcon>}
+                    renderOption={renderPaymentOption}
                 />
                 <Flex gap="md"
                     justify="flex-end"
