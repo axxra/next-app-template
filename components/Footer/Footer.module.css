@@ -6,6 +6,7 @@
 .inner {
     height: rem(63px);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

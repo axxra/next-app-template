@@ -4,6 +4,7 @@ import { MantineProvider, ColorSchemeScript, Box, Flex, Container, Stack } from 
 import { theme } from '../theme';
 import { Header } from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import cls from "./root.module.css";
 
 export const metadata = {
   title: 'LocalCrypto P2P Buy & Sell',
@@ -18,20 +19,17 @@ export default function RootLayout({ children }: { children: any }) {
     <html lang="en">
       <head>
         <ColorSchemeScript />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
+        <meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport' />
       </head>
       <body>
-        <MantineProvider theme={theme} >
-          <Box style={{ minWidth: "1200px" }}>
+        <MantineProvider theme={theme} defaultColorScheme={"dark"} >
+          <Box className={cls.root}>
             <Header />
-            <Box pt={"lg"} pb={"lg"} style={{ minHeight: "calc(100vh - 128px)" }}>
+            <Box style={{ minHeight: "calc(100vh - 128px)" }}>
               {children}
             </Box>
+            <Footer />
           </Box>
-          <Footer />
         </MantineProvider>
       </body>
     </html>

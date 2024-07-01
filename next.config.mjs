@@ -5,6 +5,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 export default withBundleAnalyzer({
+  productionBrowserSourceMaps: true,
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
