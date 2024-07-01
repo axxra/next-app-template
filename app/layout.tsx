@@ -25,9 +25,11 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme} >
-          <Header />
-          <Box pt={"lg"} pb={"lg"} style={{ minHeight: "calc(100vh - 128px)" }}>
-            {children}
+          <Box style={{ minWidth: "1200px" }}>
+            <Header />
+            <Box pt={"lg"} pb={"lg"} style={{ minHeight: "calc(100vh - 128px)" }}>
+              {children}
+            </Box>
           </Box>
           <Footer />
         </MantineProvider>
