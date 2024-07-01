@@ -1,7 +1,7 @@
 "use client";
 
 import { cryptoList, fiatList, useCryptoStore, useFiatStore, useMenuStore } from "@/store";
-import { ActionIcon, Button, Container, Flex, Group, NumberInput, Select, SelectProps, Text, Title, rem } from "@mantine/core";
+import { ActionIcon, Box, Button, Container, Flex, Group, NumberInput, Select, SelectProps, Text, Title, rem } from "@mantine/core";
 import { IconArrowsExchange, IconCheck } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { UpdateData } from "../UpdateData/UpdateData";
@@ -59,25 +59,25 @@ export function BuySellFilter({ params }: { params: { pagetype: string, cryptosy
         ); */
 
     return (
-        <Container size="lg" mt={rem(16)}>
-            <Flex m="lg" gap='sm'
+        <Container size="lg">
+            <Flex pb={"lg"} pt={"lg"} gap='sm'
                 justify="flex-start"
                 align="center" direction="column">
                 <Title>
                     {`${pagetype === 'buy' ? 'Buy' : 'Sell'} ${cryptoList[cryptoparam].label} ${pagetype === 'buy' ? 'using' : 'for'} ${fiatparam === 'ALL' ? `any FIAT currency` : `${fiatList[fiatparam].label}`}`}
                 </Title>
-                <Container size={1000}>
+                <Box w={1000}>
                     <Text c="dimmed" mb="md">
                         LocalCrypto is the best platform for directly {pagetype === 'buy' ? "buying" : "selling"} {cryptoList[cryptoparam].value}-{cryptoList[cryptoparam].label} {pagetype === 'buy' ? "using" : "for"} {fiatparam === "ALL" ? '' : fiatList[fiatparam].value + "-"}{fiatparam === 'ALL' ? `any FIAT currency` : fiatList[fiatparam].label} from person to person (P2P). It is the first platform to implement the Self-KYC verification model, allowing users to verify buyer's identity themselves.
                     </Text>
-                </Container>
+                </Box>
             </Flex>
             <Group>
                 <Button.Group>
                     {items}
                 </Button.Group>
             </Group>
-            <Group grow mt={16}>
+            <Group grow pt={"lg"}>
                 <NumberInput hideControls allowDecimal={false} placeholder="Enter Amount to filter" rightSection={
                     <ActionIcon variant="filled" size="md" aria-label="ChangeAmountCurrency" onClick={() => { setAmtCurrency(amtCurrency === 'base' ? 'fiat' : 'base') }}>
                         <IconArrowsExchange />

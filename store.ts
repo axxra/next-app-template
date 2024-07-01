@@ -74,7 +74,7 @@ type setMenuAction = {
 }
 
 export const useMenuStore = create<setMenuType & setMenuAction>()((set) => ({
-    menu: 'buy',
+    menu: '',
     setMenu: (menu) => set(() => ({ menu })),
     menuOpen: false,
     setMenuOpen: (menuOpen) => set(() => ({ menuOpen })),

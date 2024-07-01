@@ -1,9 +1,9 @@
 import '@mantine/core/styles.css';
 import React from 'react';
-import { MantineProvider, ColorSchemeScript, Box } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript, Box, Flex, Container, Stack } from '@mantine/core';
 import { theme } from '../theme';
 import { Header } from '@/components/Header/Header';
-import cls from './root.module.css';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata = {
   title: 'LocalCrypto P2P Buy & Sell',
@@ -24,11 +24,12 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>
-          <Box className={cls.root}>
-            <Header />
+        <MantineProvider theme={theme} >
+          <Header />
+          <Box pt={"lg"} pb={"lg"} style={{ minHeight: "calc(100vh - 128px)" }}>
             {children}
           </Box>
+          <Footer />
         </MantineProvider>
       </body>
     </html>
