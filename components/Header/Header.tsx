@@ -28,8 +28,8 @@ export function Header() {
             <Container size="lg" className={cls.inner}>
                 <Image h={32} w="auto" fit="contain" src="/logo.svg" alt="logo" darkHidden />
                 <Image h={32} w="auto" fit="contain" src="/dark.svg" alt="logo" lightHidden />
-                <Group>
-                    <Group >
+                <Group >
+                    <Group gap={"xs"} >
                         {
                             Object.values(menuList).map((r, i) => (
                                 <Button key={i} color={r.key === 'sell' ? "myRed" : colorScheme === 'dark' ? 'myDark' : 'myLight'} leftSection={r.icon} variant={menu === r.key ? "filled" : "subtle"} onClick={() => { if (r.key != menu) router.push(r.key === 'buy' || r.key === 'sell' ? `/p2p/${r.key}/${cryptoSelected}_${fiatSelected}` : r.key === 'account' ? isAuth ? `/${r.key}` : `/signup` : `/${r.key}`, { scroll: false }); setMenu(r.key); }}>
@@ -37,21 +37,6 @@ export function Header() {
                                 </Button>
                             ))
                         }
-                        {/* <Button leftSection={<IconBasketUp />} variant={menu === 'buy' ? "filled" : "subtle"} onClick={() => { router.push(`/p2p/buy/${cryptoSelected}_${fiatSelected}`); setMenu('buy') }}>
-                            Buy
-                        </Button>
-                        <Button color="myRed" leftSection={<IconBasketDown />} variant={menu === 'sell' ? "filled" : "subtle"} onClick={() => { router.push(`/p2p/sell/${cryptoSelected}_${fiatSelected}`); setMenu('sell') }}>
-                            Sell
-                        </Button>
-                        <Button leftSection={<IconHistory />} variant={menu === 'history' ? "filled" : "subtle"} onClick={() => { setMenu('history') }}>
-                            History
-                        </Button>
-                        <Button leftSection={<IconWallet />} variant={menu === 'wallet' ? "filled" : "subtle"} onClick={() => { setMenu('wallet') }}>
-                            Wallet
-                        </Button>
-                        <Button w={120} leftSection={<IconUser />} variant={menu === 'account' ? "filled" : "subtle"} onClick={() => { setMenu('account') }}>
-                            {isAuth ? `Account` : `Sign Up`}
-                        </Button> */}
                     </Group>
                     <ToggleMenu />
                 </Group>

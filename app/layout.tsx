@@ -1,3 +1,4 @@
+import "./global.css"
 import '@mantine/core/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript, Box, Flex, Container, Stack } from '@mantine/core';
@@ -19,13 +20,13 @@ export default function RootLayout({ children }: { children: any }) {
     <html lang="en">
       <head>
         <ColorSchemeScript />
-        <meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport' />
+        {/* <meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1' name='viewport' /> */}
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme={"dark"} >
           <Box className={cls.root}>
             <Header />
-            <Box style={{ minHeight: "calc(100vh - 128px)" }}>
+            <Box style={{ minHeight: "calc(100vh - 145px)" }}>
               {children}
             </Box>
             <Footer />
