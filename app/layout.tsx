@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: any }) {
         <MantineProvider theme={theme} defaultColorScheme={"dark"} >
           <Box className={cls.root}>
             <Header />
-            <Box style={{ minHeight: "calc(100vh - 145px)" }}>
+            <Box style={{ minHeight: "calc(100vh - 128px)" }}>
               {children}
             </Box>
             <Footer />
